@@ -8,8 +8,8 @@ import java.util.Objects;
 public class ElectronicProduct extends Product {
     private int warranty; // in months
 
-    public ElectronicProduct(String name, double price, String brand, int inStock, int warranty) {
-        super(name, price, brand, inStock);
+    public ElectronicProduct(String name, double price, String brand, int quantity, int warranty) {
+        super(name, price, brand, quantity);
         this.warranty = warranty;
     }
 
@@ -24,8 +24,7 @@ public class ElectronicProduct extends Product {
 
     @Override
     public void display() {
-        System.out.println("Electronic: " + name + " by " + brand + ", Price: $" + getPrice() + ", Warranty: "
-                + warranty + " months, In Stock: " + inStock);
+        System.out.println("Electronic: " + name + " by " + brand + ", Price: $" + getPrice() + ", Warranty: " + warranty + " months, Quantity: " + quantity);
     }
 
     @Override
@@ -35,21 +34,36 @@ public class ElectronicProduct extends Product {
         return super.clone();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        ElectronicProduct that = (ElectronicProduct) o;
-        return Double.compare(that.price, price) == 0 &&
-                warranty == that.warranty &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(brand, that.brand);
-    }
+        @Override
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, price, brand, warranty);
+        public boolean equals(Object o) {
+
+            if (this == o) return true;
+
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ElectronicProduct that = (ElectronicProduct) o;
+
+            return Double.compare(that.price, price) == 0 &&
+
+                    warranty == that.warranty &&
+
+                    quantity == that.quantity && // Added quantity
+
+                    Objects.equals(name, that.name) &&
+
+                    Objects.equals(brand, that.brand);
+
+        }
+
+    
+
+        @Override
+
+        public int hashCode() {
+
+            return Objects.hash(name, price, brand, quantity, warranty); // Added quantity
+
+        }
+
     }
-}

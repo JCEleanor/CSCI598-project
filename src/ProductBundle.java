@@ -10,9 +10,9 @@ public class ProductBundle extends Product {
     private List<Product> children = new ArrayList<>();
     private double discount; // e.g., 0.10 for 10% discount
 
-    public ProductBundle(String name, String brand, int inStock, double discount) {
+    public ProductBundle(String name, String brand, int quantity, double discount) {
         // Price for a bundle is calculated, so we can pass 0 initially.
-        super(name, 0, brand, inStock);
+        super(name, 0, brand, quantity);
         this.discount = discount;
     }
 
@@ -40,17 +40,25 @@ public class ProductBundle extends Product {
         return total * (1 - discount);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Bundle: " + name + " by " + brand + ", Discount: " + (discount * 100) + "%, Price: $"
-                + getPrice() + ", In Stock: " + inStock);
-        System.out.println("--- Bundle Contents ---");
-        for (Product child : children) {
-            System.out.print("  - ");
-            child.display();
+        @Override
+
+        public void display() {
+
+            System.out.println("Bundle: " + name + " by " + brand + ", Discount: " + (discount * 100) + "%, Price: $" + getPrice() + ", Quantity: " + quantity);
+
+            System.out.println("--- Bundle Contents ---");
+
+            for (Product child : children) {
+
+                System.out.print("  - ");
+
+                child.display();
+
+            }
+
+            System.out.println("--- End Bundle ---");
+
         }
-        System.out.println("--- End Bundle ---");
-    }
 
     @Override
     public Product clone() {

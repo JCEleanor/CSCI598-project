@@ -8,17 +8,18 @@ import java.util.List;
  * (leaves)
  * and product bundles (composites).
  */
-public abstract class Product implements Cloneable {
+public abstract class Product implements Cloneable { // shallow copy TODO: deep copy if needed
     protected String name;
     protected double price;
     protected String brand;
-    protected int inStock;
+    /** thinking to rename this variable to "quantity. 0 means not in stock" */
+    protected int quantity;
 
-    public Product(String name, double price, String brand, int inStock) {
+    public Product(String name, double price, String brand, int quantity) {
         this.name = name;
         this.price = price;
         this.brand = brand;
-        this.inStock = inStock;
+        this.quantity = quantity;
     }
 
     // --- Common methods for all products ---
@@ -30,12 +31,37 @@ public abstract class Product implements Cloneable {
         return brand;
     }
 
-    public int getInStock() {
-        return inStock;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setInStock(int stock) {
-        this.inStock = stock;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /**
+     * Increases the stock for this product.
+     * 
+     * @param amount The number of items to add to the stock.
+     */
+    public void restock(int amount) {
+        if (amount > 0) {
+            this.quantity += amount;
+        }
+    }
+
+    /**
+     * Decreases the stock for this product.
+     * 
+     * @param amount The number of items sold.
+     * @return true if the sale was successful, false if there was not enough stock.
+     */
+    public boolean sell(int amount) {
+        if (amount > 0 && this.quantity >= amount) {
+            this.quantity -= amount;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -64,8 +90,22 @@ public abstract class Product implements Cloneable {
         return clone;
     }
 
+    /**
+     * 
+     * `addToCart()` and `removeFromCart()`: These methods imply that a Product
+     * should be aware of the ShoppingCart.
+     * In a robust design, a Product should just be a data object that represents an
+     * item. The ShoppingCart should be
+     * responsible for managing its own contents, and another class like InvManager
+     * should be responsible for tracking
+     * stock changes. This avoids giving the Product class too many
+     * responsibilities.
+     * 
+     */
+
     // --- Composite Pattern methods ---
     // Default implementations for leaf nodes. Composites will override these.
+    // not abostract methods so client can treat all Product objects uniformly
     public void add(Product product) {
         throw new UnsupportedOperationException("This operation is not supported for a single product.");
     }

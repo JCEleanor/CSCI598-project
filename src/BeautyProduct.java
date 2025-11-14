@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 public class BeautyProduct extends Product {
     private Date expirationDate;
 
-    public BeautyProduct(String name, double price, String brand, int inStock, Date expirationDate) {
-        super(name, price, brand, inStock);
+    public BeautyProduct(String name, double price, String brand, int quantity, Date expirationDate) {
+        super(name, price, brand, quantity);
         this.expirationDate = expirationDate;
     }
 
@@ -27,8 +27,7 @@ public class BeautyProduct extends Product {
     @Override
     public void display() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: "
-                + sdf.format(expirationDate) + ", In Stock: " + inStock);
+        System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: " + sdf.format(expirationDate) + ", Quantity: " + quantity);
     }
 
     @Override
@@ -39,21 +38,36 @@ public class BeautyProduct extends Product {
         return cloned;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        BeautyProduct that = (BeautyProduct) o;
-        return Double.compare(that.price, price) == 0 &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(brand, that.brand) &&
-                Objects.equals(expirationDate, that.expirationDate);
-    }
+        @Override
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, price, brand, expirationDate);
+        public boolean equals(Object o) {
+
+            if (this == o) return true;
+
+            if (o == null || getClass() != o.getClass()) return false;
+
+            BeautyProduct that = (BeautyProduct) o;
+
+            return Double.compare(that.price, price) == 0 &&
+
+                    quantity == that.quantity && // Added quantity
+
+                    Objects.equals(name, that.name) &&
+
+                    Objects.equals(brand, that.brand) &&
+
+                    Objects.equals(expirationDate, that.expirationDate);
+
+        }
+
+    
+
+        @Override
+
+        public int hashCode() {
+
+            return Objects.hash(name, price, brand, quantity, expirationDate); // Added quantity
+
+        }
+
     }
-}
