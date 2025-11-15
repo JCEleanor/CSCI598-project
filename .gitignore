@@ -1,0 +1,35 @@
+# Compiled Java class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Build output directories
+/bin/
+/build/
+/out/
+/target/
+
+# IDE configuration files
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Operating System files
+.DS_Store
+Thumbs.db
