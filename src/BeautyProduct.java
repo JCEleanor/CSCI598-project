@@ -4,10 +4,12 @@ import java.util.Objects;
 import java.text.SimpleDateFormat;
 
 /**
- * Represents a Leaf in the Composite pattern.
- * This is a concrete product that can be cloned (Prototype).
+ * Represents an abstract beauty product.
+ * This class serves as a base for more specific beauty products like sunscreen
+ * or shampoo.
+ * It is a "Leaf" in the Composite pattern.
  */
-public class BeautyProduct extends Product {
+public abstract class BeautyProduct extends Product {
     private Date expirationDate;
 
     public BeautyProduct(String name, double price, String brand, int quantity, Date expirationDate) {
@@ -27,47 +29,44 @@ public class BeautyProduct extends Product {
     @Override
     public void display() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: " + sdf.format(expirationDate) + ", Quantity: " + quantity);
+        System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: "
+                + sdf.format(expirationDate) + ", Quantity: " + quantity);
     }
 
     @Override
     public Product clone() {
-        BeautyProduct cloned = (BeautyProduct) super.clone();
+        BeautyProduct cloned = (BeautyProduct) super.clone(); // shallow copy
         // Date is mutable, so we should create a new Date object for the clone
         cloned.expirationDate = (Date) this.expirationDate.clone();
         return cloned;
     }
 
-        @Override
+    @Override
+    public boolean equals(Object o) {
 
-        public boolean equals(Object o) {
+        if (this == o)
+            return true;
 
-            if (this == o) return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
-            if (o == null || getClass() != o.getClass()) return false;
+        BeautyProduct that = (BeautyProduct) o;
 
-            BeautyProduct that = (BeautyProduct) o;
+        return Double.compare(that.price, price) == 0 &&
 
-            return Double.compare(that.price, price) == 0 &&
+                quantity == that.quantity && // Added quantity
 
-                    quantity == that.quantity && // Added quantity
+                Objects.equals(name, that.name) &&
 
-                    Objects.equals(name, that.name) &&
+                Objects.equals(brand, that.brand) &&
 
-                    Objects.equals(brand, that.brand) &&
-
-                    Objects.equals(expirationDate, that.expirationDate);
-
-        }
-
-    
-
-        @Override
-
-        public int hashCode() {
-
-            return Objects.hash(name, price, brand, quantity, expirationDate); // Added quantity
-
-        }
+                Objects.equals(expirationDate, that.expirationDate);
 
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, brand, quantity, expirationDate); // Added quantity
+    }
+
+}
