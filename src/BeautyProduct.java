@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat;
 public abstract class BeautyProduct extends Product {
     private Date expirationDate;
 
-    public BeautyProduct(String name, double price, String brand, int quantity, Date expirationDate) {
-        super(name, price, brand, quantity);
+    public BeautyProduct(String name, double price, String brand, Date expirationDate) {
+        super(name, price, brand);
         this.expirationDate = expirationDate;
     }
 
@@ -30,7 +30,7 @@ public abstract class BeautyProduct extends Product {
     public void display() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: "
-                + sdf.format(expirationDate) + ", Quantity: " + quantity);
+                + sdf.format(expirationDate));
     }
 
     @Override
@@ -54,8 +54,6 @@ public abstract class BeautyProduct extends Product {
 
         return Double.compare(that.price, price) == 0 &&
 
-                quantity == that.quantity && // Added quantity
-
                 Objects.equals(name, that.name) &&
 
                 Objects.equals(brand, that.brand) &&
@@ -66,7 +64,7 @@ public abstract class BeautyProduct extends Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, brand, quantity, expirationDate); // Added quantity
+        return Objects.hash(name, price, brand, expirationDate); // Added quantity
     }
 
 }

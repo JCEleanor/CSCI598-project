@@ -7,8 +7,8 @@ import java.util.Objects;
 public class Phone extends ElectronicProduct {
     private double screenSize; // in inches
 
-    public Phone(String name, double price, String brand, int quantity, int warranty, double screenSize) {
-        super(name, price, brand, quantity, warranty);
+    public Phone(String name, double price, String brand, int warranty, double screenSize) {
+        super(name, price, brand, warranty);
         this.screenSize = screenSize;
     }
 
@@ -19,7 +19,7 @@ public class Phone extends ElectronicProduct {
     @Override
     public void display() {
         System.out.println("Phone: " + name + " by " + brand + ", Screen: " + screenSize + "\", Price: $" + getPrice()
-                + ", Warranty: " + getWarranty() + " months, Quantity: " + quantity);
+                + ", Warranty: " + getWarranty() + " months");
     }
 
     @Override

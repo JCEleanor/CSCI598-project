@@ -10,9 +10,9 @@ public class ProductBundle extends Product {
     private List<Product> children = new ArrayList<>();
     private double discount; // e.g., 0.10 for 10% discount
 
-    public ProductBundle(String name, String brand, int quantity, double discount) {
+    public ProductBundle(String name, String brand, double discount) {
         // Price for a bundle is calculated, so we can pass 0 initially.
-        super(name, 0, brand, quantity);
+        super(name, 0, brand);
         this.discount = discount;
     }
 
@@ -44,7 +44,7 @@ public class ProductBundle extends Product {
 
         public void display() {
 
-            System.out.println("Bundle: " + name + " by " + brand + ", Discount: " + (discount * 100) + "%, Price: $" + getPrice() + ", Quantity: " + quantity);
+            System.out.println("Bundle: " + name + " by " + brand + ", Discount: " + (discount * 100) + "%, Price: $" + getPrice());
 
             System.out.println("--- Bundle Contents ---");
 

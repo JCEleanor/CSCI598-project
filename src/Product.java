@@ -12,14 +12,11 @@ public abstract class Product implements Cloneable { // shallow copy TODO: deep 
     protected String name;
     protected double price;
     protected String brand;
-    /** thinking to rename this variable to "quantity. 0 means not in stock" */
-    protected int quantity;
 
-    public Product(String name, double price, String brand, int quantity) {
+    public Product(String name, double price, String brand) {
         this.name = name;
         this.price = price;
         this.brand = brand;
-        this.quantity = quantity;
     }
 
     // --- Common methods for all products ---
@@ -29,39 +26,6 @@ public abstract class Product implements Cloneable { // shallow copy TODO: deep 
 
     public String getBrand() {
         return brand;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    /**
-     * Increases the stock for this product.
-     * 
-     * @param amount The number of items to add to the stock.
-     */
-    public void restock(int amount) {
-        if (amount > 0) {
-            this.quantity += amount;
-        }
-    }
-
-    /**
-     * Decreases the stock for this product.
-     * 
-     * @param amount The number of items sold.
-     * @return true if the sale was successful, false if there was not enough stock.
-     */
-    public boolean sell(int amount) {
-        if (amount > 0 && this.quantity >= amount) {
-            this.quantity -= amount;
-            return true;
-        }
-        return false;
     }
 
     /**

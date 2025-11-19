@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Sunscreen extends BeautyProduct {
     private int spf;
 
-    public Sunscreen(String name, double price, String brand, int quantity, Date expirationDate, int spf) {
-        super(name, price, brand, quantity, expirationDate);
+    public Sunscreen(String name, double price, String brand, Date expirationDate, int spf) {
+        super(name, price, brand, expirationDate);
         this.spf = spf;
     }
 
@@ -22,7 +22,7 @@ public class Sunscreen extends BeautyProduct {
         // Re-implement display to include SPF
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy");
         System.out.println("Sunscreen: " + name + " by " + brand + ", SPF: " + spf + ", Price: $" + getPrice()
-                + ", Expires: " + sdf.format(getExpirationDate()) + ", Quantity: " + quantity);
+                + ", Expires: " + sdf.format(getExpirationDate()));
     }
 
     @Override

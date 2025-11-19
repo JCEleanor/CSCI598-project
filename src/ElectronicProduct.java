@@ -10,8 +10,8 @@ import java.util.Objects;
 public abstract class ElectronicProduct extends Product {
     private int warranty; // in months
 
-    public ElectronicProduct(String name, double price, String brand, int quantity, int warranty) {
-        super(name, price, brand, quantity);
+    public ElectronicProduct(String name, double price, String brand, int warranty) {
+        super(name, price, brand);
         this.warranty = warranty;
     }
 
@@ -27,7 +27,7 @@ public abstract class ElectronicProduct extends Product {
     @Override
     public void display() {
         System.out.println("Electronic: " + name + " by " + brand + ", Price: $" + getPrice() + ", Warranty: "
-                + warranty + " months, Quantity: " + quantity);
+                + warranty + " months");
     }
 
     @Override
@@ -52,8 +52,6 @@ public abstract class ElectronicProduct extends Product {
 
                 warranty == that.warranty &&
 
-                quantity == that.quantity && // Added quantity
-
                 Objects.equals(name, that.name) &&
 
                 Objects.equals(brand, that.brand);
@@ -62,7 +60,7 @@ public abstract class ElectronicProduct extends Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, brand, quantity, warranty); // Added quantity
+        return Objects.hash(name, price, brand, warranty); // Added quantity
     }
 
 }

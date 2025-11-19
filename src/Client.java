@@ -1,18 +1,22 @@
 import java.util.Date;
 
 public class Client {
+
+    public boolean checkout(int total) {
+        return true;
+    }
     public static void main(String[] args) {
         System.out.println("--- Demonstrating Product Hierarchy, Prototype, and Composite Patterns ---");
 
         // 1. Create concrete products (Leaf nodes)
         // Phone (ElectronicProduct subclass)
-        Phone iphone = new Phone("iPhone 15", 999.99, "Apple", 10, 12, 6.1);
-        Phone samsung = new Phone("Galaxy S23", 899.99, "Samsung", 15, 12, 6.2);
+        Phone iphone = new Phone("iPhone 15", 999.99, "Apple", 12, 6.1);
+        Phone samsung = new Phone("Galaxy S23", 899.99, "Samsung", 12, 6.2);
 
         // Sunscreen (BeautyProduct subclass)
         Date expiryDate = new Date(System.currentTimeMillis() + 31536000000L); // 1 year from now
-        Sunscreen neutrogena = new Sunscreen("Neutrogena SPF 50", 15.50, "Neutrogena", 20, expiryDate, 50);
-        Sunscreen supergoop = new Sunscreen("Supergoop Unseen Sunscreen", 34.00, "Supergoop", 12, expiryDate, 40);
+        Sunscreen neutrogena = new Sunscreen("Neutrogena SPF 50", 15.50, "Neutrogena", expiryDate, 50);
+        Sunscreen supergoop = new Sunscreen("Supergoop Unseen Sunscreen", 34.00, "Supergoop", expiryDate, 40);
 
         // Display individual products
         System.out.println("\n--- Individual Products ---");
@@ -22,25 +26,22 @@ public class Client {
         // 2. Demonstrate Prototype Pattern (cloning)
         System.out.println("\n--- Demonstrating Prototype Pattern ---");
         Phone clonedIphone = (Phone) iphone.clone();
-        clonedIphone.setQuantity(1); // Cloned item has its own quantity
         clonedIphone.display();
-        System.out.println("Original iPhone quantity: " + iphone.getQuantity());
-        System.out.println("Cloned iPhone quantity: " + clonedIphone.getQuantity());
 
         // 3. Create a ProductBundle (Composite node)
         System.out.println("\n--- Demonstrating Composite Pattern (Product Bundle) ---");
-        ProductBundle techBundle = new ProductBundle("Premium Tech Bundle", "Multi-Brand", 5, 0.10); // 10% discount
+        ProductBundle techBundle = new ProductBundle("Premium Tech Bundle", "Multi-Brand", 0.10); // 10% discount
         techBundle.add(iphone);
         techBundle.add(samsung);
         techBundle.display();
 
-        ProductBundle beautyEssentials = new ProductBundle("Summer Beauty Pack", "Various", 8, 0.05); // 5% discount
+        ProductBundle beautyEssentials = new ProductBundle("Summer Beauty Pack", "Various", 0.05); // 5% discount
         beautyEssentials.add(neutrogena);
         beautyEssentials.add(supergoop);
         beautyEssentials.display();
 
         // Add a bundle to another bundle (nested composite)
-        ProductBundle ultimateBundle = new ProductBundle("Ultimate Lifestyle Pack", "MegaCorp", 2, 0.15);
+        ProductBundle ultimateBundle = new ProductBundle("Ultimate Lifestyle Pack", "MegaCorp", 0.15);
         ultimateBundle.add(techBundle);
         ultimateBundle.add(beautyEssentials);
         ultimateBundle.display();
@@ -57,12 +58,18 @@ public class Client {
 
         // 5. Demonstrate restock and sell methods
         System.out.println("\n--- Demonstrating Stock Management ---");
-        System.out.println("iPhone quantity before sell: " + iphone.getQuantity());
-        iphone.sell(1);
-        System.out.println("iPhone quantity after sell: " + iphone.getQuantity());
-        iphone.restock(5);
-        System.out.println("iPhone quantity after restock: " + iphone.getQuantity());
-        System.out.println("Attempting to sell 20 iPhones (only 14 in stock): " + iphone.sell(20));
-        System.out.println("iPhone quantity after failed sell: " + iphone.getQuantity());
+        InvManager im = InvManager.getInstance();
+        im.addProductToInv(neutrogena, 10);
+        im.addProductToInv(supergoop, 10);
+        im.addProductToInv(iphone, 1);
+        im.addProductToInv(samsung, 5);
+        im.displayAllProducts();
+        System.out.println("iPhone quantity before sell: " + im.getQuantity(iphone));
+        im.sell(iphone, 1);
+        System.out.println("iPhone quantity after sell: " + im.getQuantity(iphone));
+        im.restock(iphone, 14);
+        System.out.println("iPhone quantity after restock: " + im.getQuantity(iphone));
+        System.out.println("Attempting to sell 20 iPhones (only 14 in stock): " + im.sell(iphone, 20));
+        System.out.println("iPhone quantity after failed sell: " + im.getQuantity(iphone));
     }
 }
