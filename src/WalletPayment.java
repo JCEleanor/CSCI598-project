@@ -36,6 +36,8 @@ public class WalletPayment implements PaymentStrategy {
 
     @Override
     public void pay(double amount) {
+
+        System.out.println("Paid " + amount + " using Wallet");
         
     }
     @Override
@@ -50,6 +52,12 @@ class AppleWalletPayment extends WalletPayment
     public AppleWalletPayment(String emailId) {
         super(emailId);
     }
+    @Override
+    public void pay(double amount) {
+
+        System.out.println("Paid " + amount + " using Apple Wallet");
+        
+    }
     
 }
 
@@ -58,6 +66,12 @@ class SamsungWalletPayment extends WalletPayment
 
     public SamsungWalletPayment(String emailId) {
         super(emailId);
+    }
+    @Override
+    public void pay(double amount) {
+
+        System.out.println("Paid " + amount + " using Samsung Wallet");
+        
     }
     
 }

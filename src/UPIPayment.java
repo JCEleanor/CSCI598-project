@@ -40,10 +40,7 @@ public class UPIPayment implements PaymentStrategy {
 
     @Override
     public void pay(double amount) {
-        if (!paymentVerfied) {
-            System.out.println("Payment failed: UPI ID not verified.");
-            return;
-        }
+ 
         System.out.println("Paid " + amount + " using UPI: " + upiId);
     }
 
