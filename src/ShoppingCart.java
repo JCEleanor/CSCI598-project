@@ -46,6 +46,11 @@ public class ShoppingCart {
     }
 
     public List<Product> getItems() {
+        // less efficient but safer
         return new ArrayList<>(items);
+    }
+
+    public void reset() {
+        items.clear();
     }
 }
