@@ -17,18 +17,9 @@ public class InvManager {
         return instance;
     }
 
-    /**
-     * Increases the stock for this product.
-     * If product already exists in inventory, just adds quantity
-     * If product doesn't exist in inventory, creates new inventory item with given qty
-     *
-     * @param p The product to add to the stock.
-     * @param qty The number of items to add to the stock.
-     */
-    public void addToInventory(Product p, int qty) {
-        if (inventory.containsKey(p) && qty > 0) {
-            int newAmount = inventory.get(p) + qty;
-            inventory.put(p, newAmount);
+    public void addProductToInv(Product p, int qty) {
+        if (inventory.containsKey(p)) {
+            System.out.println("Error: Already in the system.");
         } else {
             inventory.put(p, qty);
         }
@@ -44,6 +35,18 @@ public class InvManager {
             inventory.remove(p);
         } else {
             System.out.println("Error: this product is not in the inventory");
+        }
+    }
+    /**
+     * Increases the stock for this product.
+     *
+     * @param p The product to add to the stock.
+     * @param amount The number of items to add to the stock.
+     */
+    public void restock(Product p, int amount) {
+        if (amount > 0) {
+            int newAmount = inventory.get(p) + amount;
+            inventory.put(p, newAmount);
         }
     }
 
