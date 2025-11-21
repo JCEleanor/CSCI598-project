@@ -9,10 +9,13 @@ public class CardPayment implements PaymentStrategy {
     protected int cvv;
     protected String nameOnCard;
     protected boolean paymentVerfied = true;
+    protected StringBuilder errorMsg = new StringBuilder("Error:Invalid card details-");
+
     public CardPayment(String cardNumber, String expDate, int cvv, String nameOnCard) {
         if (cardNumber.length() == 12) {
             this.cardNumber = cardNumber;
         } else {
+        errorMsg.append("(Card number should be 12 digits);");
         paymentVerfied = false;
         }
 
@@ -24,21 +27,25 @@ public class CardPayment implements PaymentStrategy {
             if (expiry.isAfter(now)) {
                 this.expDate = expDate;
             } else {
+                errorMsg.append("(Card is expired);");
                 paymentVerfied = false;
             }
         } else {
+            errorMsg.append("(Enter expiration date);");
             paymentVerfied = false;
         }
 
         if (cvv >= 100 && cvv <= 999) {
             this.cvv = cvv;
         } else {
+            errorMsg.append("(CVV should be 3 digits);");
             paymentVerfied = false;
         }
 
         if (nameOnCard != null && !nameOnCard.isEmpty()) {
             this.nameOnCard = nameOnCard;
         } else {
+            errorMsg.append("(Enter name on card);");
             paymentVerfied = false;
         }
     }
@@ -50,9 +57,13 @@ public class CardPayment implements PaymentStrategy {
 
     @Override
     public boolean verify() {
-
+        
+        if(paymentVerfied==false){
+        System.out.println(errorMsg.toString());
+        }
         return paymentVerfied;
     }
+
 }
 
 
@@ -76,3 +87,5 @@ class DebitCardPayment extends CardPayment {
         super(cardNumber, expDate, cvv, nameOnCard);
     }
 }
+
+

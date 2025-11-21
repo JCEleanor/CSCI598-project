@@ -5,6 +5,7 @@ import java.util.List;
 public class UPIPayment implements PaymentStrategy {
     protected boolean paymentVerfied = true;
     protected String upiId;
+    protected StringBuilder errorMsg = new StringBuilder("Error:Invalid UPI details-(Please enter valid UPIID {fromat:name@<bankname>})");
 
     public UPIPayment(String upiId) {
 
@@ -20,9 +21,12 @@ public class UPIPayment implements PaymentStrategy {
                         "okhdfcbank",
                         "axl"
                 );
+
+            if(parts.length == 2){
                  String user = parts[0];
                  String provider = parts[1];
-            if (parts.length == 2 && !user.isEmpty() && !provider.isEmpty() && validProviders.contains(provider.toLowerCase())) {
+
+            if (!user.isEmpty() && !provider.isEmpty() && validProviders.contains(provider.toLowerCase())) {
 
             
                     this.upiId = upiId;
@@ -30,10 +34,18 @@ public class UPIPayment implements PaymentStrategy {
 
 
             } else {
+                
                 paymentVerfied = false;    
+            }
+            }
+            else{
+               
+                paymentVerfied = false;
+
             }
 
         } else {
+            
             paymentVerfied = false;         
         }
     }
@@ -46,8 +58,13 @@ public class UPIPayment implements PaymentStrategy {
 
     @Override
     public boolean verify() {
+        if(paymentVerfied==false){
+        System.out.println(errorMsg.toString());
+        }
         return paymentVerfied;
     }
+
+    
 }
 
 

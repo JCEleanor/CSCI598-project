@@ -6,14 +6,15 @@ import java.util.List;
 public class WalletPayment implements PaymentStrategy {
     protected String emailId;
     protected boolean paymentVerfied = true;
+    protected StringBuilder errorMsg = new StringBuilder("Error:Invalid Wallet details-(Please enter valid emailID {fromat:name@<account>.com})");
     public WalletPayment(String emailId) {
 
        if (emailId != null && emailId.contains("@")) {
 
-            List<String> allowedDomains = List.of("gmail.com", "yahoo.com", "outlook.com");
+            List<String> allowedDomains = List.of("gmail.com", "yahoo.com", "outlook.com","mines.edu");
 
             String[] parts = emailId.split("@");
-            System.out.println(parts[0]+ parts[1]);
+            
 
             if (parts.length == 2 && !parts[0].isEmpty() && !parts[1].isEmpty()) {
 
@@ -42,8 +43,13 @@ public class WalletPayment implements PaymentStrategy {
     }
     @Override
     public boolean verify() {
+       if(paymentVerfied==false){
+        System.out.println(errorMsg.toString());
+        }
         return paymentVerfied;
     }
+
+
 }
 
 class AppleWalletPayment extends WalletPayment
