@@ -16,6 +16,14 @@ public class PaymentProcessor {
         strategy.pay(amount);
     }
 
+    public void populatePaymentInfo(){
+        if(strategy == null) {
+            System.out.println("No payment method selected!");
+            return;
+        }
+        strategy.fillInformation();
+    }
+
     public void validate(){
         if(strategy == null) {
             System.out.println("No payment method selected!");

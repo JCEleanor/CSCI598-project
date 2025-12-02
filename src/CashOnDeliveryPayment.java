@@ -1,38 +1,34 @@
 
 import java.util.List;
+import java.util.Scanner;
 
 
 public class CashOnDeliveryPayment implements PaymentStrategy {
 
-private Integer pinCode;
-protected boolean paymentVerfied = true;
-protected StringBuilder errorMsg = new StringBuilder("Error:COD not available in this location.");
-public CashOnDeliveryPayment(Integer pinCode)
-{
+    private Integer pinCode;
+    protected StringBuilder errorMsg = new StringBuilder("Error:COD not available in this location.");
 
-List<Integer> codAvailablePincodes = List.of(80001, 80002, 80003);
-if (codAvailablePincodes.contains(pinCode)) {
-    this.pinCode = pinCode;
-} 
-else {
-    paymentVerfied = false;
-}
-
-}
-@Override
+    @Override
     public void pay(double amount) {
-
         System.out.println("Payment will be done at the time of delivery");
-        
     }
+
     @Override
     public boolean verify() {
-         if(paymentVerfied==false){
-        System.out.println(errorMsg.toString());
+        List<Integer> codAvailablePincodes = List.of(80001, 80002, 80003);
+        if (!codAvailablePincodes.contains(pinCode)) {
+            System.out.println(errorMsg.toString());
+            return false;
+        }else {
+            return true;
         }
-        return paymentVerfied;
     }
 
-
-
+    @Override
+    public void fillInformation() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter PIN code");
+        pinCode = sc.nextInt();
+        sc.close();
+    }
 }

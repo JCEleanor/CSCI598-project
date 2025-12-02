@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Represents the Composite in the Composite pattern.
@@ -10,10 +11,13 @@ public class ProductBundle extends Product {
     private List<Product> children = new ArrayList<>();
     private double discount; // e.g., 0.10 for 10% discount
 
-    public ProductBundle(String name, String brand, double discount) {
-        // Price for a bundle is calculated, so we can pass 0 initially.
-        super(name, 0, brand);
-        this.discount = discount;
+    @Override
+    public void setProductInfo() {
+        super.setProductInfo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter bundle discount: ");
+        discount = sc.nextDouble();
+        sc.close();
     }
 
     @Override

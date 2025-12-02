@@ -1,5 +1,6 @@
 
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Represents an abstract electronic product.
@@ -7,12 +8,16 @@ import java.util.Objects;
  * or laptops.
  * It is a "Leaf" in the Composite pattern.
  */
-public abstract class ElectronicProduct extends Product {
+public class ElectronicProduct extends Product {
     private int warranty; // in months
 
-    public ElectronicProduct(String name, double price, String brand, int warranty) {
-        super(name, price, brand);
-        this.warranty = warranty;
+    @Override
+    public void setProductInfo() {
+        super.setProductInfo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter product warranty: ");
+        warranty = sc.nextInt();
+        sc.close();
     }
 
     public int getWarranty() {

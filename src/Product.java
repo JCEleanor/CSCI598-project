@@ -1,5 +1,6 @@
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Represents the component in the Composite pattern and the prototype in the
@@ -13,10 +14,15 @@ public abstract class Product implements Cloneable { // shallow copy TODO: deep 
     protected double price;
     protected String brand;
 
-    public Product(String name, double price, String brand) {
-        this.name = name;
-        this.price = price;
-        this.brand = brand;
+    public void setProductInfo(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter product name: ");
+        name = sc.nextLine();
+        System.out.print("Enter product price: ");
+        price = sc.nextDouble();
+        System.out.print("Enter product brand: ");
+        brand = sc.nextLine();
+        sc.close();
     }
 
     // --- Common methods for all products ---

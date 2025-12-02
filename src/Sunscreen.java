@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * A concrete implementation of a BeautyProduct.
  */
-public class Sunscreen extends BeautyProduct {
+public class Sunscreen extends PerishableProduct {
     private int spf;
 
     public Sunscreen(String name, double price, String brand, Date expirationDate, int spf) {

@@ -2,6 +2,7 @@
 import java.util.Date;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 /**
  * Represents an abstract beauty product.
@@ -9,12 +10,22 @@ import java.text.SimpleDateFormat;
  * or shampoo.
  * It is a "Leaf" in the Composite pattern.
  */
-public abstract class BeautyProduct extends Product {
+public class PerishableProduct extends Product {
     private Date expirationDate;
 
-    public BeautyProduct(String name, double price, String brand, Date expirationDate) {
-        super(name, price, brand);
-        this.expirationDate = expirationDate;
+    @Override
+    public void setProductInfo() {
+        super.setProductInfo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter expiration year: ");
+        int year = sc.nextInt();
+        System.out.print("Enter expiration month: ");
+        int month = sc.nextInt();
+        System.out.print("Enter expiration day: ");
+        int day = sc.nextInt();
+
+        expirationDate = new Date(year-1900, month, day);
+        sc.close();
     }
 
     public Date getExpirationDate() {
@@ -35,7 +46,7 @@ public abstract class BeautyProduct extends Product {
 
     @Override
     public Product clone() {
-        BeautyProduct cloned = (BeautyProduct) super.clone(); // shallow copy
+        PerishableProduct cloned = (PerishableProduct) super.clone(); // shallow copy
         // Date is mutable, so we should create a new Date object for the clone
         cloned.expirationDate = (Date) this.expirationDate.clone();
         return cloned;
@@ -50,7 +61,7 @@ public abstract class BeautyProduct extends Product {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        BeautyProduct that = (BeautyProduct) o;
+        PerishableProduct that = (PerishableProduct) o;
 
         return Double.compare(that.price, price) == 0 &&
 
