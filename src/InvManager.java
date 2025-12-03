@@ -17,6 +17,14 @@ public class InvManager {
         return instance;
     }
 
+    public Product getProduct(String name) {
+        if (inventory.containsKey(name)) {
+            return inventory.get(name).getProduct();
+        }
+        System.out.println("Error: no product exists with that name");
+        return null;
+    }
+
     /**
      * Increases the stock for this product.
      * If product already exists in inventory, just adds quantity
