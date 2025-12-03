@@ -8,8 +8,6 @@ public class Client {
     static Map<String,Product> productTypes;
     static Map<String,PaymentStrategy> paymentOptions;
 
-    //TODO Might need to change the map in InvManager to use strings to map to a tuple of product and qtn
-
     public static void fillAssocMaps(){
         productTypes = new HashMap<String,Product>();
         paymentOptions = new HashMap<String,PaymentStrategy>();
@@ -68,12 +66,8 @@ public class Client {
         fillAssocMaps();
 
         Scanner scanner = new Scanner(System.in);
-<<<<<<< Updated upstream
-        label:
-=======
         System.out.println("Welcome to E-Trading. Are you here to sell or to buy today?");
         System.out.println("If you would like to exit type exit");
->>>>>>> Stashed changes
         while(true) {
             String userIn = scanner.next();
 
