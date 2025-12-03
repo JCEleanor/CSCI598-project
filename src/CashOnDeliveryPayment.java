@@ -29,6 +29,5 @@ public class CashOnDeliveryPayment implements PaymentStrategy {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter PIN code");
         pinCode = sc.nextInt();
-        sc.close();
     }
 }

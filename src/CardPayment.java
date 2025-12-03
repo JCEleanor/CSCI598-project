@@ -53,14 +53,13 @@ public class CardPayment implements PaymentStrategy {
     public void fillInformation() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter the card number: ");
-        String cardNumber = sc.nextLine();
+        cardNumber = sc.nextLine();
         System.out.println("Please enter the expiration date: ");
-        String expDate = sc.nextLine();
+        expDate = sc.nextLine();
         System.out.println("Please enter the cvv: ");
-        int cvv = sc.nextInt();
+        cvv = sc.nextInt();
         System.out.println("Please enter the name on card: ");
-        String nameOnCard = sc.nextLine();
-        sc.close();
+        nameOnCard = sc.nextLine();
     }
 
 }

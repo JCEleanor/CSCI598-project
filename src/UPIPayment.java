@@ -48,7 +48,6 @@ public class UPIPayment implements PaymentStrategy {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter UPI ID: ");
         upiId = sc.nextLine();
-        sc.close();
     }
 }
 

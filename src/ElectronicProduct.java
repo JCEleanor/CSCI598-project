@@ -17,7 +17,6 @@ public class ElectronicProduct extends Product {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter product warranty: ");
         warranty = sc.nextInt();
-        sc.close();
     }
 
     public int getWarranty() {

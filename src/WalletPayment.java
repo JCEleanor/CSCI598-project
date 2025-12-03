@@ -39,7 +39,6 @@ public class WalletPayment implements PaymentStrategy {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter email");
         String emailId = scanner.nextLine();
-        scanner.close();
     }
 
 

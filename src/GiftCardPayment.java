@@ -52,6 +52,5 @@ public class GiftCardPayment implements PaymentStrategy
         giftCardPIN = sc.nextInt();
         System.out.println("Enter Gift Card Amount: ");
         amount = sc.nextDouble();
-        sc.close();
     }
 }

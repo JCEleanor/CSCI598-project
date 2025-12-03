@@ -17,7 +17,6 @@ public class ProductBundle extends Product {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter bundle discount: ");
         discount = sc.nextDouble();
-        sc.close();
     }
 
     @Override

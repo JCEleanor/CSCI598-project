@@ -25,7 +25,6 @@ public class PerishableProduct extends Product {
         int day = sc.nextInt();
 
         expirationDate = new Date(year-1900, month, day);
-        sc.close();
     }
 
     public Date getExpirationDate() {
