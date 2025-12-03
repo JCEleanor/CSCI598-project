@@ -68,10 +68,13 @@ public class Client {
         fillAssocMaps();
 
         Scanner scanner = new Scanner(System.in);
+<<<<<<< Updated upstream
         label:
+=======
+        System.out.println("Welcome to E-Trading. Are you here to sell or to buy today?");
+        System.out.println("If you would like to exit type exit");
+>>>>>>> Stashed changes
         while(true) {
-            System.out.println("Welcome to E-Trading. Are you here to sell or to buy today?");
-            System.out.println("If you would like to exit type exit");
             String userIn = scanner.next();
 
             //Maybe able to divide this if into seperate classes
