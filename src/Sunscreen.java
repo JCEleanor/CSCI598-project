@@ -8,10 +8,10 @@ import java.util.Objects;
 public class Sunscreen extends PerishableProduct {
     private int spf;
 
-    public Sunscreen(String name, double price, String brand, Date expirationDate, int spf) {
-        super(name, price, brand, expirationDate);
-        this.spf = spf;
-    }
+//    public Sunscreen(String name, double price, String brand, Date expirationDate, int spf) {
+//        super(name, price, brand, expirationDate);
+//        this.spf = spf;
+//    }
 
     public int getSpf() {
         return spf;

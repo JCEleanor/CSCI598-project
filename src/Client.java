@@ -42,19 +42,29 @@ public class Client {
         System.out.println("Here is a list of products, what do you want to buy?");
         inventory.displayAllProducts();
         String productIn = scanner.next();
+        Product userProduct;
+        try{
+            userProduct = inventory.getProduct(productIn);
+        } catch (Exception e) {
+            System.out.println("That product does not exist in our inventory");
+            return;
+        }
+
         System.out.println("How much do you want to buy?");
         int qtnIn = scanner.nextInt();
+
+
         System.out.println("How do you want to pay?");
         String userOption = scanner.next();
         PaymentStrategy paymentMethod = paymentOptions.get(userOption);
-
         //Change payment methods to get information by themselves (call them here)
         PaymentProcessor payProcessor = new PaymentProcessor();
         payProcessor.setPaymentMethod(paymentMethod);
         payProcessor.populatePaymentInfo();
         payProcessor.validate();
-        if (inventory.sell(/*Product*/, qtnIn)) {
-            int productTotal = /*Product*/.getPrice();
+
+        if (inventory.sell(userProduct, qtnIn)) {
+            double productTotal = userProduct.getPrice();
             payProcessor.checkout(productTotal);
         } else {
             System.out.println("Not enough stock");
@@ -68,10 +78,9 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to E-Trading. Are you here to sell or to buy today?");
         System.out.println("If you would like to exit type exit");
-        while(true) {
+        boolean exit = false;
+        while(!exit) {
             String userIn = scanner.next();
-
-            //Maybe able to divide this if into seperate classes
             switch (userIn) {
                 case "sell":
                     sellProduct(inventory);
@@ -80,7 +89,8 @@ public class Client {
                     buyProduct(inventory);
                     break;
                 case "exit":
-                    break label;
+                    exit = true;
+                    break;
                 default:
                     System.out.println("Not a valid option, either use sell, buy, or exit");
                     break;

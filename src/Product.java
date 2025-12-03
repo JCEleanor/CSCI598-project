@@ -20,6 +20,7 @@ public abstract class Product implements Cloneable { // shallow copy TODO: deep 
         name = sc.nextLine();
         System.out.print("Enter product price: ");
         price = sc.nextDouble();
+        sc.nextLine();
         System.out.print("Enter product brand: ");
         brand = sc.nextLine();
         sc.close();

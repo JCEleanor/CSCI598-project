@@ -7,10 +7,10 @@ import java.util.Objects;
 public class Phone extends ElectronicProduct {
     private double screenSize; // in inches
 
-    public Phone(String name, double price, String brand, int warranty, double screenSize) {
-        super(name, price, brand, warranty);
-        this.screenSize = screenSize;
-    }
+//    public Phone(String name, double price, String brand, int warranty, double screenSize) {
+//        super(name, price, brand, warranty);
+//        this.screenSize = screenSize;
+//    }
 
     public double getScreenSize() {
         return screenSize;
