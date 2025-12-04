@@ -9,12 +9,12 @@ import java.util.Scanner;
  * (leaves)
  * and product bundles (composites).
  */
-public abstract class Product implements Cloneable { // shallow copy TODO: deep copy if needed
+public abstract class Product implements Cloneable {
     protected String name;
     protected double price;
     protected String brand;
 
-    public void setProductInfo(){
+    public void setProductInfo() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter product name: ");
         name = sc.nextLine();
