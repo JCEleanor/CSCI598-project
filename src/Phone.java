@@ -1,5 +1,6 @@
 
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * A concrete implementation of an ElectronicProduct.
@@ -14,6 +15,13 @@ public class Phone extends ElectronicProduct {
 
     public double getScreenSize() {
         return screenSize;
+    }
+
+    public void setProductInfo() {
+        super.setProductInfo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter screen size in pixels: ");
+        screenSize = sc.nextInt();
     }
 
     @Override

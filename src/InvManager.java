@@ -17,12 +17,12 @@ public class InvManager {
         return instance;
     }
 
-    public Product getProduct(String name) {
+    public Product getProduct(String name) throws Exception {
         if (inventory.containsKey(name)) {
             return inventory.get(name).getProduct();
         }
         System.out.println("Error: no product exists with that name");
-        return null;
+        throw new Exception("No product of name");
     }
 
     /**

@@ -8,12 +8,36 @@ public class Client {
     static Map<String,Product> productTypes;
     static Map<String,PaymentStrategy> paymentOptions;
 
+    public static Product buildBundle(){
+        Scanner scanner = new Scanner(System.in);
+        boolean addAnotherProduct = true;
+        System.out.println("The following relates to the overall bundle:");
+        ProductBundle bundle = new ProductBundle();
+        bundle.setProductInfo();
+
+        System.out.println("The following relates to the products to add to bundle:");
+        while(addAnotherProduct){
+            System.out.println("What type of product do you want to add?");
+            String type = scanner.nextLine();
+            Product userProduct = productTypes.get(type).clone();
+            userProduct.setProductInfo();
+            bundle.add(userProduct);
+
+            System.out.println("Do you want to add another product? y/n");
+            addAnotherProduct = scanner.nextLine().equalsIgnoreCase("y");
+        }
+
+        return bundle;
+    }
+
     public static void fillAssocMaps(){
         productTypes = new HashMap<String,Product>();
         paymentOptions = new HashMap<String,PaymentStrategy>();
 
         productTypes.put("Electronic",new ElectronicProduct());
         productTypes.put("Perishable",new PerishableProduct());
+        productTypes.put("Phone",new Phone());
+        productTypes.put("Sunscreen",new Sunscreen());
         paymentOptions.put("Debit Card",new CardPayment());
         paymentOptions.put("Credit Card",new CreditCardPayment());
         paymentOptions.put("CashOnDelivery",new CashOnDeliveryPayment());
@@ -27,10 +51,19 @@ public class Client {
     private static void sellProduct(InvManager inventory){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("What type of product do you want to sell?");
-        String type = scanner.nextLine();
-        Product userProduct = productTypes.get(type).clone();
-        userProduct.setProductInfo();
+        System.out.print("Do you want to make a product bundle? y/n");
+        String productBundleDesired = scanner.nextLine();
+        boolean bundle = productBundleDesired.equalsIgnoreCase("y");
+
+        Product userProduct;
+        if(bundle){
+            userProduct = buildBundle();
+        }else{
+            System.out.println("What type of product do you want to sell?");
+            String type = scanner.nextLine();
+            userProduct = productTypes.get(type).clone();
+            userProduct.setProductInfo();
+        }
 
         System.out.println("How much do you want to sell?");
         int qtnIn = scanner.nextInt();
@@ -57,6 +90,10 @@ public class Client {
         System.out.println("How do you want to pay?");
         String userOption = scanner.next();
         PaymentStrategy paymentMethod = paymentOptions.get(userOption);
+        if(paymentMethod == null){
+            System.out.println("We don't support thay payment method");
+            return;
+        }
         //Change payment methods to get information by themselves (call them here)
         PaymentProcessor payProcessor = new PaymentProcessor();
         payProcessor.setPaymentMethod(paymentMethod);
@@ -77,9 +114,11 @@ public class Client {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to E-Trading. Are you here to sell or to buy today?");
-        System.out.println("If you would like to exit type exit");
+
         boolean exit = false;
         while(!exit) {
+            System.out.println("Type sell to sell and buy to buy.");
+            System.out.println("If you would like to exit type exit");
             String userIn = scanner.next();
             switch (userIn) {
                 case "sell":

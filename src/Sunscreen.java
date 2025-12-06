@@ -1,6 +1,7 @@
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * A concrete implementation of a BeautyProduct.
@@ -15,6 +16,13 @@ public class Sunscreen extends PerishableProduct {
 
     public int getSpf() {
         return spf;
+    }
+
+    public void setProductInfo() {
+        super.setProductInfo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter SPF: ");
+        spf = sc.nextInt();
     }
 
     @Override
