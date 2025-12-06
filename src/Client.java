@@ -61,7 +61,12 @@ public class Client {
         }else{
             System.out.println("What type of product do you want to sell?");
             String type = scanner.nextLine();
-            userProduct = productTypes.get(type).clone();
+            Product userProductType = productTypes.get(type);
+            if(userProductType == null){
+                System.out.println("Product type does not exist");
+                return;
+            }
+            userProduct = userProductType.clone();
             userProduct.setProductInfo();
         }
 

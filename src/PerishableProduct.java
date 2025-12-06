@@ -39,15 +39,13 @@ public class PerishableProduct extends Product {
     @Override
     public void display() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.println("Beauty: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: "
+        System.out.println("Perishable: " + name + " by " + brand + ", Price: $" + getPrice() + ", Expires: "
                 + sdf.format(expirationDate));
     }
 
     @Override
     public Product clone() {
         PerishableProduct cloned = (PerishableProduct) super.clone(); // shallow copy
-        // Date is mutable, so we should create a new Date object for the clone
-        cloned.expirationDate = (Date) this.expirationDate.clone();
         return cloned;
     }
 
